@@ -1,0 +1,58 @@
+<include file="common/header"/>
+<body>
+<div class="type_style">
+    <div class="crumbs">
+        <ul>
+            <li>
+                <a href="{:url('GoodsType/index')}">分类管理</a>
+            </li>
+            <li class="uline">/</li>
+            <li>
+                <a class="active" href="javascript:;">添加分类</a>
+            </li>
+        </ul>
+    </div>
+    <form action="" method="post" class="form form-horizontal">
+        <div class="Operate_cont clearfix">
+            <label class="form-label"> 商品分类名称：</label>
+            <div class="formControls ">
+                <input type="text" class="input-text" value="" placeholder="" name="class_name" datatype="*"
+                       nullmsg="分类名称不能为空！">
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">分类描述：</label>
+            <div class="formControls ">
+                <input type="text" class="input-text" value="" placeholder="" name="class_desc" datatype="*"
+                       nullmsg="分类描述不能为空！">
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+
+
+        <div class="Operate_cont clearfix">
+            <label class="form-label">是否开启：</label>
+            <div class="formControls">
+                <label>
+                <input type="radio" name="class_status" value="1" checked>是
+            </label>
+                <label>
+                    <input type="radio" name="class_status" value="0">否
+                </label>
+            </div>
+        </div>
+
+        <div class="Operate_cont clearfix">
+
+            <input class="btn btn-primary radius Operate_cont_btn" type="submit" value="提交">
+            <a class="btn btn-primary return" onclick="javascript:history.back(-1);return false;">返回</a>
+
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="__STATIC__/admin/Widget/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/js/role.js"> </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<include file="common/header"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/admin/Widget/webuploader-0.1.5/webuploader.css">
+<body>
+<div class="type_style">
+    <div class="crumbs">
+        <ul>
+            <li>
+                <a href="{:url('Level/index')}">等级管理</a>
+            </li>
+            <li class="uline">/</li>
+            <li>
+                <a class="active" href="javascript:;">修改等级</a>
+            </li>
+        </ul>
+    </div>
+    <form action="" method="post" class="form form-horizontal">
+        <div class="Operate_cont clearfix">
+
+            <label class="form-label"> 等级名称：</label>
+            <div class="formControls ">
+                <input type="text" class="input-text" value="{$list.name}" placeholder="请填写等级名称" name="name" datatype="*"
+                       nullmsg=" 等级名称不能为空！">
+                <span class="Validform_checktip"></span>
+            </div>
+
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">升级条件：</label>
+            <div class="formControls " >
+                &nbsp;&nbsp; 抵抗力累计达到<input type="text"  class="input-text" placeholder="请填写多少抵抗力" name="num" datatype="*" value="{$list.num}"
+                                           nullmsg="升级条件不能为空！"/>
+
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+
+
+        <div class="Operate_cont clearfix">
+
+            <input class="btn btn-primary radius Operate_cont_btn" type="submit" value="提交">
+            <a class="btn btn-primary return" onclick="javascript:history.back(-1);return false;">返回</a>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/admin/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/Widget/Validform/5.3.2/Validform.min.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>微信支付</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script src="/static/index/extends/layer/layer.js"></script>
+    <script type="text/javascript">
+        //调用微信JS api 支付
+        function jsApiCall()
+        {
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest',
+            <?php echo $result['jsApiParameters']; ?>,
+            function(res){
+                if(res.err_msg == "get_brand_wcpay_request:ok"){
+                    //
+                }else{
+                    //	alert(用户);//支付失败
+                    layer.msg('用户取消支付,系统将自动跳转');
+                    //  window.setTimeout("window.location='http://api.qingshishenghuo.shop/index/order/paysuccess?order_id=$result['order_id'] '",2000);
+                    window.setTimeout("window.location.href='http://qingshishenghuo.shop/#/myorder'",1000);
+                }
+
+            });
+        }
+
+        function callpay()
+        {
+            if (typeof WeixinJSBridge == "undefined"){
+                if( document.addEventListener ){
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                }else if (document.attachEvent){
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            }else{
+                jsApiCall();
+            }
+        }
+        setTimeout(function(){
+            callpay(); }, 1000);
+        // 	window.onload=function(){
+        // 		callpay();
+        // }
+
+    </script>
+    <!-- 2、异步传输定时间检测支付状态 -->
+    <script type="text/javascript">
+        // 3、定时器调用函数
+        window.setInterval("get_pay_status()",2000);
+        // 4、异步检测函数
+        function get_pay_status(){
+            url="checkstatus";
+            pay_success_url="http://ceshi.phtcsxy.com/#/home";
+            var order_id= {$result['order_id']};
+            // console.log(2);
+            // alert trade_no ;
+            postData={
+                'order_id':order_id,
+            }
+            $.post(url,postData,function(result){
+                //console.log(result);
+                if(result.status==1){
+                    self.location=pay_success_url;
+                }
+
+            })
+        }
+    </script>
+</head>
+<body>
+
+<br/>
+<!--<font color="#9ACD32"><b>该笔订单支付金额为<span style="color:#f00;font-size:50px">1</b></font><br/><br/>
+   <div align="center">
+       <button style="width:210px; height:50px; border-radius: 15px;background-color:#FE6714; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" type="button" onclick="callpay()" >立即支付</button>
+   </div>-->
+</body>
+</html>

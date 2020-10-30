@@ -1,0 +1,64 @@
+<include file="common/header"/>
+<body>
+<div class="type_style">
+    <div class="crumbs">
+        <ul>
+            <li>
+                <a href="{:url('Rbac/role')}">管理员管理</a>
+            </li>
+            <li class="uline">/</li>
+            <li>
+                <a class="active" href="javascript:;">添加管理员</a>
+            </li>
+        </ul>
+    </div>
+    <form action="" method="post" class="form form-horizontal">
+        <div class="Operate_cont clearfix">
+            <label class="form-label"> 管理员名称：</label>
+            <div class="formControls ">
+                <input type="text" class="input-text" value="" placeholder="" name="username"  datatype="*"
+                       nullmsg="管理员名称不能为空！">
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">密码：</label>
+            <div class="formControls ">
+                <input type="password" class="input-text" value="" placeholder=""  datatype="/^[\w_-]{6,16}$/" name="password"
+                       nullmsg="密码不能为空！">
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">所属角色组：</label>
+            <div class="formControls ">
+                <volist name="role_data" id="vo">
+                    <input type="checkbox" name="role_id[]" value="{$vo['id']}" class="role_id" datatype="*" nullmsg="角色组不能为空！" >
+                    {$vo.remark}
+                </volist>
+            </div>
+        </div>
+
+        <div class="Operate_cont clearfix">
+            <label class="form-label">是否开启：</label>
+            <div class="formControls">
+                <label>
+                    <input type="radio" name="status" value="1" checked>是
+                </label>
+                <label>
+                    <input type="radio" name="status" value="0">否
+                </label>
+            </div>
+        </div>
+
+        <div class="Operate_cont clearfix">
+
+            <input class="btn btn-primary radius Operate_cont_btn" type="submit" value="提交">
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="__STATIC__/admin/Widget/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/js/role.js"> </script>
+</body>
+</html>

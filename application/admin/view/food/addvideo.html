@@ -1,0 +1,96 @@
+<include file="common/header"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/admin/Widget/webuploader-0.1.5/webuploader.css">
+<body>
+<div class="type_style">
+    <div class="crumbs">
+        <ul>
+            <li class="uline">/</li>
+            <li>
+                <a class="active" href="javascript:;">添加视频</a>
+            </li>
+        </ul>
+    </div>
+    <form action="" method="post" class="form form-horizontal">
+            <div class="Operate_cont clearfix">
+            <label class="form-label"> 时长(分钟)：</label>
+            <div class="formControls ">
+                <input type="text" class="input-text" value="" placeholder="请填写时长" name="minute" datatype="*"
+                       nullmsg=" 时长不能为空！">
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label"> 动作名称：</label>
+            <div class="formControls ">
+                <input type="text" class="input-text" value="" placeholder="请填写动作名称" name="action" datatype="*"
+                       nullmsg=" 动作名称不能为空！">
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+
+        <div class="Operate_cont clearfix">
+            <label class="form-label">视频：</label>
+            <div id="uploader" class="wu-example">
+                <!--用来存放文件信息-->
+                <div id="thelist" class="uploader-list"></div>
+                <div class="btns">
+                    需知:(考虑后期删除问题,请单个上传)
+                    <div id="filePicker">选择视频</div>
+                    <span style="position: absolute;margin-left:400px;margin-top: -50px;" id="tip"></span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="Operate_cont clearfix">
+
+            <input class="btn btn-primary radius Operate_cont_btn" type="submit" value="提交">
+            <a class="btn btn-primary return" onclick="javascript:history.back(-1);return false;">返回</a>
+
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="__STATIC__/admin/Widget/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/Widget/webuploader-0.1.5/webuploader.js"></script>
+<script>
+    var uploader = WebUploader.create({
+
+        // 选完文件后，是否自动上传。
+        auto: true,
+
+        // swf文件路径
+        swf: '/static/admin/Widget/webuploader-0.1.5/Uploader.swf',
+
+        // 文件接收服务端。
+        server: '/food/upload',
+
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#filePicker',
+
+        // 只允许选择文件。
+        accept: {
+            title: 'Images',
+            extensions: 'mp4,flv,jpeg,bmp,doc,docx,rar,pdf',
+        }
+    });
+    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+    uploader.on( 'uploadSuccess', function( file ,data) {
+
+        if(data.status=='success'){
+            $('#tip').append(' <video style="width: 150px;height: 100px" src='+data.msg+' controls="controls" >' );
+            $('#tip').append('<input type="hidden" name="video" value='+data.msg+'>');
+            // console.log(data.msg);
+        }else{
+            $('#tip').html(' <span style="color:red">'+data.msg+'</span>');
+        }
+
+
+    });
+</script>
+
+</body>
+</html>

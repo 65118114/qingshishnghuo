@@ -1,0 +1,99 @@
+
+<include file="common/header"/>
+<body>
+<div class="type_style">
+    <div class="crumbs">
+        <ul>
+            <li>
+                <a href="{:url('User/index')}">会员管理</a>
+            </li>
+            <li class="uline">/</li>
+            <li>
+                <a class="active" href="javascript:;">编辑会员</a>
+            </li>
+        </ul>
+    </div>
+      <form action="" method="post">
+        <div class="Operate_cont clearfix">
+            <label class="form-label"> 用户名称：{$list['mobile']}</label>
+
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">注册时间：{$list['logintime']|date="Y-m-d H:i:s"}</label>
+        </div>
+    <div class="Operate_cont clearfix">
+        <label class="form-label">成为会员时间：{$list['viptime']|date="Y-m-d H:i:s"}</label>
+    </div>
+    <div class="Operate_cont clearfix">
+        <label class="form-label">实名状态：<if condition="$list['is_real'] eq 1 ">已实名<else/>未实名</if></label>
+    </div>
+   <!-- <div class="Operate_cont clearfix">
+        <label class="form-label">是否绑定银行卡：<if condition="$list['is_bank'] eq 1 ">已绑定<else/>未绑定</if></label>
+    </div>
+    <div class="Operate_cont clearfix">
+        <label class="form-label">开户行名称:{$list['bankaddress']}</label>
+    </div>
+    <div class="Operate_cont clearfix">
+        <label class="form-label">账号:{$list['bankzh']}</label>
+    </div>-->
+    <div class="Operate_cont clearfix">
+        <label class="form-label">会员等级：     <select name="level">
+            <option value="-1"  <if condition="$list['level'] eq -1" > selected</if>>==请选择==</option>
+            <option value="1" <if condition="$list['level'] eq 1"> selected</if>>==普通会员==</option>
+            <option value="2" <if condition="$list['level'] eq 2"> selected</if>>==VIP==</option>
+            <option value="3" <if condition="$list['level'] eq 3"> selected</if>>==SVIP==</option>
+            <option value="4" <if condition="$list['level'] eq 4"> selected</if>>==PLUSVIP==</option>
+
+        </select></label>
+    </div>
+    <div class="Operate_cont clearfix">
+        <label class="form-label">积分：{$list['points']}</label>
+    </div>
+
+    <div class="Operate_cont clearfix">
+    <label class="form-label">佣金：{$list['money']}</label>
+</div>
+
+    <div class="Operate_cont clearfix">
+        <label class="form-label">关注状态：<if condition="$list['is_view'] eq 1 ">已关注<else/>未关注</if></label>
+    </div>
+    <div class="Operate_cont clearfix">
+        <label class="form-label">是否启用：
+            <label><input name="status" type="radio" value="1" <if condition="$list['status'] eq 1"> checked</if>>启用</label>
+            <label><input name="status" type="radio" value="0" <if condition="$list['status'] eq 0"> checked</if>>不启用</label></label>
+    </div>
+
+    <div class="Operate_cont clearfix">
+        <label class="form-label">支付密码：
+            <input name="paypassword" type="text" class="text_add"
+                   placeholder="" value="{$list['paypassword']}"/></label>
+    </div>
+
+          <div class="Operate_cont clearfix">
+
+              <input class="btn btn-primary radius Operate_cont_btn" type="submit" value="提交">
+              <a class="btn btn-primary return" onclick="javascript:history.back(-1);return false;">返回列表</a>
+
+          </div>
+      </form>
+</div>
+
+<script type="text/javascript" src="__STATIC__/admin/Widget/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        //表单验证
+        $("form").Validform({
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    //默认表单
+                    var objtip=o.obj.parents(".formControls").find(".Validform_checktip");
+                    cssctl(objtip,o.type);
+                    objtip.text(msg);
+                }
+            },
+            showAllError:true
+        })
+    });
+</script>
+</body>
+</html>

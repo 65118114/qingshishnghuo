@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>阿西里西提示！</title>
+    <style>
+        body,
+        html,
+        h1 {
+            background: #fff;
+            font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #333;
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            font-size: 16px;
+        }
+        
+        .s-box {
+            background: #fefefe;
+            width: 440px;
+            height: 240px;
+            position: absolute;
+            left: 50%;
+            top: 30%;
+            margin-left: -180px;
+            margin-top: 0px;
+            box-shadow: 0px 3px 3px 0px #d3d3d3;
+        }
+        
+        .s-box .border-box {
+            border: 1px solid #5fb878;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .s-box .border-box .info {
+            padding: 6px 10px;
+            background: #5fb878;
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: #fff;
+            border-radius: 0 0 0 6px;
+        }
+        
+        .s-box .logo {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 50px;
+            width: 50px;
+            margin-left: -25px;
+            transform: translateY(-190px);
+            animation: trslyup 0.6s;
+        }
+        
+        @keyframes trslyup {
+            0% {
+                transform: translateY(0px);
+            }
+            100% {
+                transform: translateY(-190px);
+            }
+        }
+        
+        @-webkit-keyframes trslyup {
+            0% {
+                transform: translateY(0px);
+            }
+            100% {
+                transform: translateY(-190px);
+            }
+        }
+        
+        @-moz-keyframes trslyup {
+            0% {
+                transform: translateY(0px);
+            }
+            100% {
+                transform: translateY(-190px);
+            }
+        }
+        
+        @-o-keyframes trslyup {
+            0% {
+                transform: translateY(0px);
+            }
+            100% {
+                transform: translateY(-190px);
+            }
+        }
+        
+        .s-box .success,
+        .s-box .error {
+            line-height: 200px;
+            font-size: 36px;
+            text-align: center;
+        }
+        
+        .s-box .e .info {
+            padding: 6px 10px;
+            background: #ef3b05;
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: #fff;
+            border-radius: 0 0 0 6px;
+        }
+        
+        .s-box .e {
+            border-color: #ef3b05;
+        }
+        
+        .s-box .e .logo {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 50px;
+            width: 50px;
+            margin-left: -25px;
+            transform: translateY(0px);
+            animation: trslydown 0.6s;
+        }
+        
+        @keyframes trslydown {
+            0% {
+                transform: translateY(-190px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @-webkit-keyframes trslydown {
+            0% {
+                transform: translateY(-190px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @-moz-keyframes trslydown {
+            0% {
+                transform: translateY(-190px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @-o-keyframes trslydown {
+            0% {
+                transform: translateY(-190px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .s-box .jump {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .s-box .border-box .jump p {
+            text-align: center;
+            padding-left: 30px;
+        }
+        
+        .s-box .jump a {
+            color: #333;
+        }
+        
+        .mask {
+            position: fixed;
+            width: 140px;
+            height: 220px;
+            background: url(__STATIC__/admin/images/info_logo.png) no-repeat;
+            right: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="s-box">
+        <!-- <div class="border-box">
+             <span class="info">温馨提示！</span>
+             <img class="logo" src="__STATIC__/admin/images/logo_s.png" alt="">
+             <div class="success">{$msg}</div>
+             <div class="jump">
+                 <p>页面自动 <a id="href" href="{$url}">跳转</a> 等待时间： <b id="wait">{$wait}</b></p>
+             </div>
+         </div>-->
+        <div class="border-box e">
+            <span class="info">温馨提示！</span>
+            <img class="logo" src="./images/logo_e.png" alt="">
+            <div class="success">{$msg}</div>
+            <div class="jump">
+                <p>页面自动 <a id="href" href="{$url}">跳转</a> 等待时间： <b id="wait">{$wait}</b></p>
+            </div>
+        </div>
+    </div>
+    <div class="mask"></div>
+    <script type="text/javascript">
+        (function() {
+            var wait = document.getElementById('wait'),
+                href = document.getElementById('href').href;
+            var interval = setInterval(function() {
+                var time = --wait.innerHTML;
+                if (time <= 0) {
+                    location.href = href;
+                    clearInterval(interval);
+                };
+            }, 1000);
+        })();
+    </script>
+</body>
+
+</html>

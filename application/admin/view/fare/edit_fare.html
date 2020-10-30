@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li{
+            list-style: none;
+            float: left;
+            margin-left: 10px;
+        }
+        form{
+            margin-left:50px;
+            margin-top:50px;
+        }
+        span{
+            color:red;
+        }
+        button{
+            background:skyblue;
+            text-decoration: none;
+            border:none;
+            color:white;
+            margin-left:50px;
+        }
+    </style>
+</head>
+<body>
+<form action="" method="post">
+    <p ><span>*</span>模板名称：<input type="text" name = "fare_name" placeholder="请输入模板名称" datatype="*"
+                             value="{$fare_one['username']}"     nullmsg="商品运费模板名称不能为空！">
+        <span class="Validform_checktip"></span></p>
+    <p><span>*</span>配送条件：
+        <label><input name="is_free" type="radio" value="1" <if condition="$fare_one['is_free'] eq 1"> checked</if>>包邮</label>
+        <label><input name="is_free" type="radio" value="0" <if condition="$fare_one['is_free'] eq 0"> checked</if>>不包邮</label>
+    </p>
+    <p><span>*</span>计费方式：按重量计费</p>
+    <ul style="overflow: hidden;margin:0;padding:0;">
+        <li style="margin:0;"><span>*</span>配送区域：</li>
+        <li>
+            首重（克）
+            <br>
+            <input type="text" name = "first_weight" placeholder="" style="width:100px;" value="{$fare_one['first_weight']}"></li>
+        <li>
+            首费（元）
+            <br>
+            <input type="text" name = "first_price" placeholder="" style="width:100px;" value="{$fare_one['first_prince']}"></li>
+        <li>
+            续重（克）
+            <br>
+            <input type="text" name = "continue_weight" placeholder="" style="width:100px;" value="{$fare_one['continue_weight']}"></li>
+        <li>
+            续费（元）
+            <br>
+            <input type="text" name = "continue_price" placeholder="" style="width:100px;" value="{$fare_one['continue_price']}"></li>
+        <li>
+            邮费满额包邮（元）
+            <br>
+            <input type="text" name = "max_price" placeholder="" style="width:100px;" value="{$fare_one['max_price']}"></li>
+    </ul>
+    <p><span>*</span>状态：
+        <label><input name="status" type="radio" value="1" <if condition="$fare_one['status'] eq 1"> checked</if>>启用</label>
+        <label><input name="status" type="radio" value="0" <if condition="$fare_one['status'] eq 0"> checked</if>>不启用</label>
+    </p>
+    <div class = "submit">
+        <button>保存提交</button>
+        <button><a href="{:url('Fare/index')}">返回列表</a></button>
+    </div>
+</form>
+<script type="text/javascript" src="__STATIC__/admin/Widget/Validform/5.3.2/Validform.min.js"></script>
+</body>
+</html>

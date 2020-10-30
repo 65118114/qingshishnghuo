@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    li{
+        list-style: none;
+        float: left;
+        margin-left: 10px;
+    }
+    form{
+        margin-left:50px;
+        margin-top:50px;
+    }
+    span{
+        color:red;
+    }
+    button{
+                background:skyblue;
+                  text-decoration: none;
+                border:none;
+                color:white;
+                margin-left:50px;
+            }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        <p class="formControls " ><span>*</span>模板名称：
+
+            <input type="text" name = "fare_name" placeholder="请输入模板名称"  datatype="*"
+                                     nullmsg="商品运费模板名称不能为空！">
+            <span class="Validform_checktip"></span></p>
+        <p><span>*</span>配送条件：
+            <label><input name="is_free" type="radio" value="1"  checked/>包邮</label>
+            <label><input name="is_free" type="radio" value="0" />不包邮</label>
+        </p>
+        <p><span>*</span>计费方式：按重量计费</p>
+        <ul style="overflow: hidden;margin:0;padding:0;">
+            <li style="margin:0;"><span>*</span>配送区域：</li>
+            <li>
+             首重（克）
+             <br>
+            <input type="text" name = "first_weight" placeholder="" style="width:100px;"></li>
+            <li>
+             首费（元）
+             <br>
+            <input type="text" name = "first_price" placeholder="" style="width:100px;"></li>
+            <li>
+             续重（克）
+             <br>
+            <input type="text" name = "continue_weight" placeholder="" style="width:100px;"></li>
+            <li>
+             续费（元）
+             <br>
+            <input type="text" name = "continue_price" placeholder="" style="width:100px;"></li>
+            <li>
+             邮费满额包邮（元）
+             <br>
+            <input type="text" name = "max_price" placeholder="" style="width:100px;"></li>
+            </ul>
+        <p><span>*</span>状态：
+            <label><input name="status" type="radio" value="1" checked />启用</label>
+            <label><input name="status" type="radio" value="0" />不启用</label>
+        </p>
+        <div class = "submit">
+            <button>保存提交</button>
+            <button><a href="{:url('Fare/index')}">返回列表</a></button>
+        </div>
+    </form>
+
+    <script src="__STATIC__/admin/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/admin/Widget/Validform/5.3.2/Validform.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            //表单验证
+            $("form").Validform({
+                tiptype:function(msg,o,cssctl){
+                    if(!o.obj.is("form")){
+                        //默认表单
+                        var objtip=o.obj.parents(".formControls").find(".Validform_checktip");
+                        cssctl(objtip,o.type);
+                        objtip.text(msg);
+                    }
+                },
+                showAllError:true
+            })
+        });
+    </script>
+</body>
+</html>

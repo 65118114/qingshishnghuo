@@ -1,0 +1,127 @@
+<include file="common/header"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/admin/Widget/webuploader-0.1.5/webuploader.css">
+<body>
+<div class="type_style">
+    <div class="crumbs">
+        <ul>
+            <li>
+                <a href="{:url('Advert/index')}">广告管理</a>
+            </li>
+            <li class="uline">/</li>
+            <li>
+                <a class="active" href="javascript:;">修改广告</a>
+            </li>
+        </ul>
+    </div>
+    <form action="" method="post" class="form form-horizontal">
+        <div class="Operate_cont clearfix">
+            <label class="form-label"> 广告位置<span class="btn btn-xs btn-danger">(后面不标注数量的默认为1个,请勿多传!)：</span>
+                <select name="advpalce">
+
+                    <option value="-1" <if condition="$list['advpalce'] eq -1">selected</if>>全部</option>
+                    <option value="0" <if condition="$list['advpalce'] eq 0">selected</if>>首页弹窗</option>
+                    <option value="1" <if condition="$list['advpalce'] eq 1">selected</if>>焦点(轮播)(三个)</option>
+                    <option value="2" <if condition="$list['advpalce'] eq 2">selected</if>>首页菜单下面</option>
+                    <option value="3" <if condition="$list['advpalce'] eq 3">selected</if>>轻食谱</option>
+                    <option value="4" <if condition="$list['advpalce'] eq 4">selected</if>>个人中心底部</option>
+                    <option value="5" <if condition="$list['advpalce'] eq 5">selected</if>>钱包中屏</option>
+
+                </select>
+            </label>
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">广告名称：
+                <input  class="input-text" placeholder="请填写广告名称" name="advertname" datatype="*" value="{$list.advertname}"
+                        nullmsg="广告名称不能为空！">
+            </label>
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">图片：</label>
+            <div id="uploader-demo">
+                <!--用来存放item-->
+                <div id="fileList" class="uploader-list"></div>
+                <div id="filePicker">上传广告图片</div>
+                <span style="position: absolute;margin-left:400px;margin-top: -50px;" id="tip"></span>
+                <img  id="img" style="width: 150px;height: 100px" src="{$list.img}" >
+            </div>
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">广告URl：
+                <input  class="input-text" placeholder="请填写广告URl" name="url" datatype="*" value="{$list.url}"
+                        nullmsg="广告URl不能为空！">
+            </label>
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">商品ID：
+                <input  class="input-text" placeholder="请填写商品ID" name="goods_id" datatype="*"  value="{$list.goods_id}"
+                        nullmsg="商品ID不能为空！">
+            </label>
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">是否显示：</label>
+            <div class="formControls">
+                <label>
+                    <input type="radio" name="is_on" value="1"  <if condition="$list.is_on eq 1">checked </if>>是
+                </label>
+                <label>
+                    <input type="radio" name="is_on" value="0" <if condition="$list.is_on eq 0">checked </if>>否
+                </label>
+            </div>
+        </div>
+
+        <div class="Operate_cont clearfix">
+            <input class="btn btn-primary radius Operate_cont_btn" type="submit" value="提交">
+            <a class="btn btn-primary return" onclick="javascript:history.back(-1);return false;">返回</a>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="__STATIC__/admin/Widget/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/Widget/webuploader-0.1.5/webuploader.js"></script>
+<script>// 初始化Web Uploader
+var uploader = WebUploader.create({
+
+    // 选完文件后，是否自动上传。
+    auto: true,
+
+    // swf文件路径
+    swf: '/static/admin/Widget/webuploader-0.1.5/Uploader.swf',
+
+    // 文件接收服务端。
+    server: '/healthy/upload',
+
+    // 选择文件的按钮。可选。
+    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+    pick: '#filePicker',
+
+    // 只允许选择图片文件。
+    accept: {
+        title: 'Images',
+        extensions: 'gif,jpg,jpeg,bmp,png',
+        mimeTypes: 'image/*'
+    }
+});
+// 当有文件被添加进队列的时候
+uploader.on( 'fileQueued', function( file ) {
+    $('#tip').html('');
+});
+
+// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+uploader.on( 'uploadSuccess', function( file ,data) {
+    //$('#tip').append('<input type="hidden" name="file[]" value='+data.msg+'>');
+    if(data.status=='success'){
+        $('#tip').append(' <img  style="width: 150px;height: 100px" src='+data.msg+' >');
+        $('#tip').append('<input type="hidden" name="img" value='+data.msg+'>');
+        $('#img').remove();
+       // console.log(data.msg);
+    }else{
+        $('#tip').html(' <span style="color:red">'+data.msg+'</span>');
+    }
+
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<include file="common/header"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/admin/Widget/webuploader-0.1.5/webuploader.css">
+<style>
+    .layui-form-label{
+        width: 150px;
+    }
+    .layui-input-block {
+        margin-left: 130px;
+        min-height: 36px
+    }
+</style>
+
+<body>
+<div class="type_style">
+    <div class="crumbs">
+        <ul>
+            <!--<li>-->
+                <!--<a href="{:url('Fashion/level')}">等级管理</a>-->
+            <!--</li>-->
+            <li class="uline">/</li>
+            <li>
+                <a class="active" href="javascript:;">添加规则</a>
+            </li>
+        </ul>
+    </div><br>
+
+    <form action="" method="post" class="form form-horizontal">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">步数兑换抵抗力：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="step"  value="{$list.step}" class="layui-input"  placeholder="填写多少步数兑换1抵抗" datatype="*" nullmsg="步数不能为空"/>
+                </div>
+                <div class="layui-form-mid layui-word-aux">兑换1抵抗力</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-block">
+                <label class="layui-form-label">每次偷取总步数的随机比例：</label>
+                <div class="layui-input-inline">
+                  最低:  <input type="text" name="low"   value="{$list.low}" class="layui-input"  placeholder="填写随机比例" datatype="*" nullmsg="随机比例不能为空"/>
+                    最高:  <input type="text" name="high"  value="{$list.high}"   class="layui-input"  placeholder="填写随机比例" datatype="*" nullmsg="随机比例不能为空"/>
+
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-block">
+                <label class="layui-form-label">签到奖励步数：</label>
+                <div class="layui-input-inline">
+                    每天签到步数奖励:  <input type="text" name="everyday"    value="{$list.everyday}"  class="layui-input"  placeholder="填写每天签到步数奖励" datatype="*" nullmsg="每天签到步数奖励不能为空"/>
+                    3天:  <input type="text" name="three"    value="{$list.three}"  class="layui-input"  placeholder="填写3天奖励步数" datatype="*" nullmsg="3天奖励步数不能为空"/>
+                    <!--5天:  <input type="text" name="five"   value="{$list.five}"  class="layui-input"  placeholder="填写5天奖励步数" datatype="*" nullmsg="5天奖励步数不能为空"/>-->
+                    7天:  <input type="text" name="seven"  value="{$list.seven}"  class="layui-input"  placeholder="填写7天奖励步数" datatype="*" nullmsg="7天奖励步数不能为空"/>
+                </div>
+            </div>
+        </div>
+                <div class="layui-form-item">
+            <div class="layui-block">
+                <label class="layui-form-label">每日兑换抵抗力最大值：</label>
+                <div class="layui-input-inline">
+                  
+                   <input type="text" name="max_power"  value="{$list.max_power}"  class="layui-input"  placeholder="填写每日兑换抵抗力最大值" datatype="*" nullmsg="每日兑换抵抗力最大值"/>
+
+                </div>
+                <div class="layui-form-mid layui-word-aux">g</div>
+            </div>
+        </div>
+
+
+        <input type="hidden" name="rule_id" value="{$list.rule_id}">
+        <div class="Operate_cont clearfix">
+
+            <input class="btn btn-primary radius Operate_cont_btn" type="submit" value="提交">
+            <a class="btn btn-primary return" onclick="javascript:history.back(-1);return false;">返回</a>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/admin/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/Widget/Validform/5.3.2/Validform.min.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?php
+//配置文件
+return [
+    'VALIDATE'=>['ext'=>'jpg,jpeg,gif,png','size'=>2097152],
+    'GOODS_PATH'=>'uploads/goods',
+    'HEALTHY_VALIDATE'=>['ext'=>'jpg,jpeg,gif,png,mp4,wmv,avi,rmvb,rm,FLV','size'=>5242880],
+    'HEALTHY_PATH'=>'uploads/healthy',
+    'NOTICE_PATH'=>'uploads/notice',
+    'VIDEO'=>['ext'=>'avi,mp4,flv','size'=>5097152],
+   'VIDEO_PATH'=>'uploads/video',
+     'AccessKeyId'=>'LTAI4GHQAN9GJ6mc9rWDCX9Z',
+    'AccessKeySecret'=>'1BpwWSJvjWYEBP00afE4YFeYlxb7ZX',
+    'Host'=>'http://qingshi1.oss-cn-beijing.aliyuncs.com',
+    'dir'=>'app/',
+    'appdir'=>'app/',
+    'bucket'=>'qingshi1',
+    'endpoint'=>'oss-cn-beijing.aliyuncs.com',
+    'callbackUrl'=>'http://qingshi.natapp1.cc/admin/video/callback',
+    'appcallbackUrl'=>'http://qingshi.natapp1.cc/admin/edition/callback',
+];

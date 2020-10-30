@@ -1,0 +1,79 @@
+<include file="common/header"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/admin/Widget/webuploader-0.1.5/webuploader.css">
+<body>
+<div class="type_style">
+    <div class="crumbs">
+        <ul>
+            <li>
+                <a href="{:url('Level/index')}">等级管理</a>
+            </li>
+            <li class="uline">/</li>
+            <li>
+                <a class="active" href="javascript:;">修改等级</a>
+            </li>
+        </ul>
+    </div>
+    <form action="" method="post" class="form form-horizontal">
+        <div class="Operate_cont clearfix">
+
+            <label class="form-label"> 等级名称：</label>
+            <div class="formControls ">
+                <input type="text" class="input-text"  placeholder="请填写等级名称" name="name" datatype="*" value="{$list.name}"
+                       nullmsg=" 等级名称不能为空！">
+                <span class="Validform_checktip"></span>
+            </div>
+
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">升级条件：</label>
+            <div class="formControls " >
+                &nbsp;&nbsp; 消费满<input type="text"  class="input-text" placeholder="请填写多少元" name="pricesum"  value="{$list.pricesum}" datatype="*"
+                                       nullmsg="升级条件不能为空！"/>元或者
+                <input type="text"  class="input-text" placeholder="绑定几个VIP会员" name="vipsum"  value="{$list.vipsum}" datatype="*"
+                       nullmsg="不能为空!"/>个或者
+                <input type="text"  class="input-text" placeholder="绑定几个SVIP会员" name="svipsum" value="{$list.svipsum}" datatype="*"
+                       nullmsg="不能为空"/>个
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">此级别分润比例：</label>
+            <div class="formControls " >
+                &nbsp; &nbsp; 直接上级分润:  <input type="text"  class="input-text" placeholder="分润比例" name="t1" datatype="*"  value="{$list.t1}"
+                                              nullmsg="分润比例不能为空！"/>% &nbsp;&nbsp;&nbsp;
+                间接上级分润:  <input type="text"  class="input-text" placeholder="分润比例" name="t2" datatype="*" value="{$list.t2}"
+                                nullmsg="分润比例不能为空！"/>%
+                <span class="Validform_checktip"></span>
+            </div>
+
+        </div>
+
+
+        <div class="Operate_cont clearfix">
+            <label class="form-label">是否启用：</label>
+            <div class="formControls">
+                <label>
+                    <input type="radio" name="status" value="1"  <if condition="$list.status eq 1" > checked</if>>是
+                </label>
+                <label>
+                    <input type="radio" name="status" value="0" <if condition="$list.status eq 0" > checked</if>>否
+                </label>
+            </div>
+        </div>
+
+        <div class="Operate_cont clearfix">
+
+            <input class="btn btn-primary radius Operate_cont_btn" type="submit" value="提交">
+            <a class="btn btn-primary return" onclick="javascript:history.back(-1);return false;">返回</a>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/admin/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/Widget/Validform/5.3.2/Validform.min.js"></script>
+
+
+
+
+</body>
+</html>

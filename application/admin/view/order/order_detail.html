@@ -1,0 +1,178 @@
+<include file="common/header" />
+<link rel="stylesheet" href="__STATIC__/admin/assets/layui/css/layui.css">
+<link rel="stylesheet" href="__STATIC__/admin/font/css/font-awesome.min.css" />
+<script src="__STATIC__/admin/assets/layer/layer.js" type="text/javascript"></script>
+<script src="__STATIC__/admin/js/common.js" type="text/javascript"></script>
+<script src="__STATIC__/admin/js/order.js"></script>
+
+<body>
+<div class="shop_check">
+	<div class="crumbs">
+		<ul>
+			<li>
+				<a href="{:url('Order/index')}">订单列表</a>
+			</li>
+			<li class="uline">/</li>
+			<li>
+				<a class="active" href="javascript:;">查看订单</a>
+			</li>
+		</ul>
+	</div>
+	<fieldset class="layui-elem-field">
+		<legend>买家信息</legend>
+		<div class="layui-field-box">
+			<div class="layui-form">
+				<table class="layui-table">
+					<thead>
+					<tr>
+						<th>收货人</th>
+						<th>手机号</th>
+						<th>收货信息</th>
+						<th>备注</th>
+					</tr>
+					</thead>
+					<!--内容容器-->
+					<tbody >
+					<tr>
+						<td>{$order_one['name']}</td>
+						<td>{$order_one['addmobile']}</td>
+						<td>{$order_one['city']} {$order_one['detailadd']}</td>
+
+						<td><if condition="!empty($order_one['remark'])">{$order_one['remark']}<else/>暂无</if></td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</fieldset>
+	<div class="margin order-check">
+		<fieldset class="layui-elem-field">
+			<legend>订单详情</legend>
+			<div class="layui-field-box">
+				<div class="layui-form">
+					<table class="layui-table">
+						<thead>
+						<tr>
+							<th>订单号</th>
+
+
+							<th>订单状态</th>
+							<th>商品</th>
+							<th>规格</th>
+							<th>数量</th>
+							<th>订单实付价格</th>
+							<th>用户留言</th>
+
+							<th>下单时间</th>
+							<th>快递</th>
+						</tr>
+						</thead>
+						<!--内容容器-->
+						<tbody >
+						<tr>
+							<td>{$order_one['trade_no']}</td>
+
+
+							<td>
+								<if condition="$order_one['order_status'] eq 0">
+									等待买家付款
+									<elseif condition="$order_one['order_status'] eq 1"/>
+									买家已付款
+									<elseif condition="$order_one['order_status'] eq 2"/>
+									卖家已发货
+									<elseif condition="$order_one['order_status'] eq 3"/>
+									待评价
+									<elseif condition="$order_one['order_status'] eq 4"/>
+									交易成功
+									<elseif condition="$order_one['order_status'] eq 5"/>
+									订单已取消
+									<elseif condition="$order_one['order_status'] eq 6"/>
+									交易关闭
+									<elseif condition="$order_one['order_status'] eq 7"/>
+									已删除
+									<elseif condition="$order_one['order_status'] eq 8"/>
+									订单处理中
+									<elseif condition="$order_one['order_status'] eq 9"/>
+									付款超时
+								</if>
+
+							</td>
+							<td><img src="{$order_one['goods_gallery_1']}">{$order_one['goods_name']}</td>
+							<td>{$order_one['attr_specs']}</td>
+							<td>{$order_one['num']}</td>
+							<td>{$order_one['price']}</td>
+						<!--	<td><a href="{$order_one['store_url']}" target="_blank">{$order_one['store_name']}</a></td>-->
+							<td><if condition="!empty($order_one['remark'])">{$order_one['remark']}<else/>暂无</if></td>
+							<td>{$order_one['create_time']|date="Y-m-d H:i:s"}</td>
+							<td>0元</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</fieldset>
+
+
+
+		<fieldset class="layui-elem-field">
+			<legend>物流信息</legend>
+			<div class="layui-field-box">
+				<div class="layui-form">
+					<table class="layui-table">
+						<thead>
+						<tr>
+							<th>收货人</th>
+							<th>地址</th>
+							<th>联系方式</th>
+							<th>配送方式</th>
+							<th>快递公司</th>
+							<th>运单号</th>
+							<th>操作(查看物流数据收费接口,请复制到网页去查询)</th>
+
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>{$order_one['name']}</td>
+							<td>{$order_one['city']} {$order_one['detailadd']}</td>
+							<td>{$order_one['addmobile']}</td>
+							<td>快递</td>
+							<th id="exp_name">{$order_one['exp_name']}</th>
+							<th id="exp_no" >{$order_one['exp_no']}</th>
+							<th>
+								<a title="查看"  id="express" href="javascript:;" class="btn btn-xs btn-info">
+									查看物流
+								</a>
+								<a title="修改订单"  href="{:url('Order/editOrder',array('order_id'=>$order_one['order_id']))}" class="btn btn-xs btn-warning">
+									修改订单
+								</a>
+							</th>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+
+<script>
+ window.onload=function(){
+
+     $('#express').click(function () {
+         exp_no= $('#exp_no').text();
+         exp_name= $('#exp_name').text();
+         that = $(this);
+       $.post('/order/queryExp',{exp_no:exp_no,exp_name:exp_name},function (res) {
+		   if(res.status=='success'){
+               that.html(res.html);
+		   }
+       })
+     })
+ }
+
+</script>
+</body>
+</html>

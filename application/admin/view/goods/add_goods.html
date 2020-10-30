@@ -1,0 +1,408 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/admin/Widget/webuploader-0.1.5/webuploader.css">
+    <style type="text/css">
+        #content {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        /*#tab_bar {*/
+            /*width: 100%;*/
+            /*float: left;*/
+        /*}*/
+
+        /*#tab_bar ul {*/
+            /*padding: 0px;*/
+            /*margin: 0px;*/
+            /*height: 20px;*/
+            /*text-align: center;*/
+            /*width: 100%;*/
+        /*}*/
+
+        /*#tab_bar li {*/
+            /*list-style-type: none;*/
+            /*float: left;*/
+            /*width: 25%;*/
+            /*height: 20px;*/
+        /*}*/
+
+        .tab_css {
+            display: none;
+        }
+
+        #preview {
+            display: inline-block;
+            width: 2.56rem;
+            height: 2.56rem;
+            position: relative;
+            background: #ccc;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #file {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            cursor: pointer;
+            z-index: 5;
+        }
+
+        p {
+            display: inline-block;
+        }
+
+        .sp {
+            color: red;
+            margin-left: 2px;
+            font-size: 10px;
+        }
+
+        button {
+            background: skyblue;
+            border: none;
+            color: white;
+            margin-left: 50px;
+        }
+
+        div {
+            /*margin-top: 30px;*/
+            text-align: left;
+        }
+        /*form {*/
+            /*margin-top: 30px;*/
+
+        /*}*/
+        form div{
+            margin-top: 30px;
+        }
+        form #edui1 div{
+            margin-top: 0;
+        }
+
+        .info-list .imgUpload .imgFile {
+            height: 130px;
+            width: 130px;;
+        }
+
+        .table {
+            list-style: none;
+            overflow: hidden;
+        }
+
+        .liimg {
+            float: left;
+            width: 60px;
+            height: 90px;
+            border: 1px solid #dbd7d7;
+            margin-left: 30px;
+            background: url('./18cc9a01a1ce347e9871d29782603b6.png') no-repeat 50%;
+        }
+
+        .int {
+            width: 100px;
+        }
+
+        .mainImg {
+
+            bottom: 1px;
+            left: 1px;
+            z-index: 10;
+            width: 128px;
+            text-align: center;
+            line-height: 25px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<form action="" method="post">
+    <div id="content">
+        <ul id="tab_bar">
+            <li id="tab1" onclick="myclick(1)">
+                基本信息
+            </li>
+            <li id="tab2" onclick="myclick(2)">
+                库存/规格
+            </li>
+            <li id="tab3" onclick="myclick(3)">
+                参数
+            </li>
+            <li id="tab4" onclick="myclick(4)">
+                详情
+            </li>
+        </ul>
+
+        <div class="tab_css" id="tab1_content" style="display: block;margin-top:30px;">
+            <div class="layui-form-item">
+                <label class="layui-form-label"> 请选择商品类型：</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="goods_type" value="1"  checked="">实体商品
+                    <input type="radio" name="goods_type" value="2" >抵抗力商品
+
+                </div>
+            </div>
+
+            <div>
+                <span class="sp">*</span>商品名称：<input type="text" name="goods_name" placeholder="请输入商品名">
+                <span class="sp">*</span>商品关键字：<input type="text" name="goods_keywords" placeholder="请输入商品关键字">
+            </div>
+            <div>
+                <span class="sp">*</span>   商品标题:<input type="text" name="goods_title" placeholder="请输入商品标题">
+                <span class="sp"> *</span> 商品销量:<input type="text" name="sale" placeholder="请输入商品销量">
+             <!--   <span class="sp"> *</span> 商品所属公司:<input type="text" name="goods_company" placeholder="请输入商品所属公司">-->
+            </div>
+            <div>
+                商品描述：
+            </div>
+            <div>
+               <textarea cols="40" rows="5" id="note"
+                         name="goods_desc" maxlength="100" value=""
+                         onkeyup="this.value=this.value.substring(0, 100)"
+                         placeholder="商品描述的长度请控制在100字以内"></textarea><span id="text-count" value="">0</span>/100
+            </div>
+            <div>
+               兑换规则：
+            </div>
+            <div>
+               <textarea cols="40" rows="5" id="note1"
+                         name="goods_rule" maxlength="100" value=""
+                         onkeyup="this.value=this.value.substring(0, 100)"
+                         placeholder="实体商品可以不写兑换规则"></textarea><span id="text-count1" value="">0</span>/100
+            </div>
+            <!--<div>-->
+
+                <!--商品类型：-->
+                <!--<label>实体商品 <input name="goods_type" type="radio" value="1" checked/></label>-->
+                <!--<label>虚拟商品<input name="goods_type" type="radio" value="2"/></label>-->
+            <!--</div>-->
+            <div>
+
+                <span class="sp">*</span>商品分类：
+                <select name="goods_cid">
+                    <option value="volvo">请选择分类</option>
+                    <volist name="goods_class" id="vo">
+                        <option value="{$vo['class_id']}">{$vo['class_name']}</option>
+
+                    </volist>
+                </select>
+                <span class="sp">*</span>配送模板：
+                <select name="goods_fid">
+                    <option value="volvo">请选择运费模板</option>
+                    <volist name="fare" id="vo">
+                        <option value="{$vo['fare_id']}">{$vo['fare_name']}</option>
+
+                    </volist>
+                </select>
+            </div>
+            <!--<div>-->
+                <!--商品属性：<label>推荐<input name="shuxing" type="checkbox" value=""/></label>-->
+                <!--<label>新品<input name="shuxing" type="checkbox" value=""/></label>-->
+                <!--<label>热卖<input name="shuxing" type="checkbox" value=""/></label>-->
+                <!--<label>包邮<input name="shuxing" type="checkbox" value=""/></label>-->
+            <!--</div>-->
+            <div>
+                <span class="sp">*</span>商品价格：<input type="text" name="original_price" placeholder="请输入商品市场价">元
+                <input type="text" name="pro_price" placeholder="请输入商品会员价">元
+
+            </div>
+            <!--<div class="layui-inline">-->
+                <!--<label class="layui-form-label">兑换所需抵抗力：</label>-->
+                <!--<div class="layui-input-inline">-->
+                    <!--<input type="text" name="goods_points"  class="layui-input" placeholder="实体商品可不填写"  >-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="layui-form-item">
+
+                <ul class="table" style="padding:0;">
+                    <p style="float:left;"><span style="color:red;">*</span>商品图片：</p>
+                    <li>
+                        <div class="field">
+                            <!--dom结构部分-->
+                            <div id="uploader-demo">
+                                <!--用来存放item-->
+                                <div id="fileList" class="uploader-list"></div>
+                                <div id="filePicker1">选择图片</div>
+                                <span style="position: absolute;margin-left: 400px;margin-top: -50px;" id="tip1">
+                                   
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+
+
+            <div>
+                <span class="sp">*</span>商品PV：<input type="text" name="goods_pv" placeholder="请输入商品PV数值">%
+            </div>
+            <div>
+                是否上架：<label>是<input name="is_on" type="radio" value="1" checked/></label>
+                <label>否<input name="is_on" type="radio" value="0"/></label>
+            </div>
+
+
+            <div onclick="myclick(2)">下一步</div>
+        </div>
+        <div class="tab_css" id="tab2_content">
+
+            <table id="tbl"></table>
+            <input type="button" class="button" value="新增规格" onclick="add()"/>
+            <div onclick="myclick(3)">下一步</div>
+
+        </div>
+        <div class="tab_css" id="tab3_content">
+
+
+            <table id="tbl1"></table>
+            <input type="button" class="button" value="新增参数" onclick="addByScript()"/>
+
+            <div onclick="myclick(4)">下一步</div>
+
+        </div>
+        <div class="tab_css" id="tab4_content">
+
+     <textarea  class="input-text"  placeholder="请填写内容"  id="ueditor" name="goods_content" datatype="*"
+                nullmsg="内容不能为空！"></textarea>
+            <!--<textarea placeholder="请输入内容" name="goods_content" id="ueditor"></textarea>-->
+            <div class="submit">
+                <button>保存提交</button>
+                <button>返回列表</button>
+            </div>
+</form>
+</div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="__STATIC__/admin/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/Widget/webuploader-0.1.5/webuploader.js"></script>
+<script>// 初始化Web Uploader
+var uploader1 = WebUploader.create({
+
+    // 选完文件后，是否自动上传。
+    auto: true,
+
+    // swf文件路径
+    swf: '/static/admin/Widget/webuploader-0.1.5/Uploader.swf',
+
+    // 文件接收服务端。
+    server: '/goods/upload',
+
+    // 选择文件的按钮。可选。
+    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+    pick: '#filePicker1',
+
+    // 只允许选择图片文件。
+    accept: {
+        title: 'Images',
+        extensions: 'gif,jpg,jpeg,bmp,png',
+        mimeTypes: 'image/*'
+    }
+});
+
+// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+uploader1.on('uploadSuccess', function (file, data) {
+    if (data.status == 'success') {
+        $('#tip1').append(' <img  style="width: 100px;height: 150px" src=' + data.msg + ' >');
+        $('#tip1').append('<input type="hidden" name="goods_gallery[]" value=' + data.msg + '>');
+    } else {
+        $('#tip1').html(' <span style="color:red">' + data.msg + '</span>');
+    }
+
+
+});
+
+</script>
+
+
+<script type="text/javascript" src="__STATIC__/admin/Widget/ueditor/1.4.3/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__STATIC__/admin/Widget/ueditor/1.4.3/ueditor.all.js"></script>
+<!--实例化编辑器-->
+<script type="text/javascript">
+    var ue = UE.getEditor('ueditor', {
+        initialFrameHeight: 500,
+        initialFrameWidth: 'auto',
+    });
+</script>
+<script type="text/javascript">
+    var myclick = function (v) {
+        var llis = document.getElementsByTagName("li");
+        for (var i = 0; i < llis.length; i++) {
+            var lli = llis[i];
+            if (lli == document.getElementById("tab" + v)) {
+                lli.style.color = "red";
+            } else {
+                lli.style.color = "gray";
+            }
+        }
+        var divs = document.getElementsByClassName("tab_css");
+        for (var i = 0; i < divs.length; i++) {
+            var divv = divs[i];
+            if (divv == document.getElementById("tab" + v + "_content")) {
+                divv.style.display = "block";
+            } else {
+                divv.style.display = "none";
+            }
+        }
+    }
+</script>
+<script>
+    var count = 1;
+
+    function addByScript() {
+        var table = document.getElementById("tbl1");
+        var newRow = table.insertRow(table.rows.length);
+        newRow.id = "row" + count;
+        var contentCell = newRow.insertCell(-1);
+        contentCell.innerHTML = '<p> 参数名称：<input type = "text" name = "parmname[]" placeholder="请输入参数名称">参数值： <input type = "text" name = "parmvalue[]" placeholder="请输入参数值"></p>';
+        contentCell = newRow.insertCell(-1);
+    };
+
+    function add() {
+        var table = document.getElementById("tbl");
+        var newRow = table.insertRow(table.rows.length);
+        newRow.id = "row" + count;
+        var contentCell = newRow.insertCell(-1);
+        contentCell.innerHTML = '<input class="int" type = "text" name = "attr_stock[]" placeholder="库存">' +
+            '<input class="int" type = "text" name = "attr_specs[]" placeholder="每盒几瓶">' +
+            '<input class="int" type = "text" name = "ooriginal_price[]" placeholder="市场价">' +
+            '<input class="int" type = "text" name = "ppro_price[]" placeholder="会员价">' +
+            '<input class="int" type = "text" name = "attr_points[]" placeholder="兑换所需抵抗力">' +
+            '<input class="int" type = "text" name = "attr_code[]" placeholder="编码">' +
+            '<input class="int" type = "text" name = "attr_bar[]" placeholder="条码">' +
+            '<input class="int" type = "text" name = "attr_weight[]" placeholder="重量">' +
+            '<input class="int" type = "text" name = "attr_ration[]" placeholder="定量">';
+        contentCell = newRow.insertCell(-1);
+    }
+</script>
+<script>
+    window.onload = function () {
+        //（document）
+        document.getElementById('note').onkeyup = function () {
+            document.getElementById('text-count').innerHTML = this.value.length;
+        }
+    };
+    window.onload = function () {
+        //（document）
+        document.getElementById('note1').onkeyup = function () {
+            document.getElementById('text-count1').innerHTML = this.value.length;
+        }
+    };
+
+
+
+
+</script>

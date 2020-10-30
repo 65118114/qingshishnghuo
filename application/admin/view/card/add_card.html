@@ -1,0 +1,121 @@
+<include file="common/header"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/admin/layui/css/layui.css">
+
+<body>
+<div class="type_style">
+    <div class="crumbs">
+        <ul>
+            <li>
+                <a href="{:url('Video/index')}">优惠券管理</a>
+            </li>
+            <li class="uline">/</li>
+            <li>
+                <a class="active" href="javascript:;">添加优惠券</a>
+            </li>
+        </ul>
+    </div>
+    <form action="" method="post" class="layui-form">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户类型</label>
+            <div class="layui-input-block">
+                <input type="radio" name="card_type" value="1" title="普通券(全部用户可用的优惠券)" checked="">
+                <input type="radio" name="card_type" value="2" title="新人券(新用户可用的优惠券)">
+                <input type="radio" name="card_type" value="3" title="会员券(开通会员用户可用的优惠券)">
+            </div>
+         </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">优惠券名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="card_name" lay-verify="title" autocomplete="off" placeholder="请输入优惠券名称" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">发行数量</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="card_num" lay-verify="title" autocomplete="off" placeholder="请输入发行数量" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">张</div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">优惠门槛;订单满</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="card_door" lay-verify="title" autocomplete="off" placeholder="请输入订单满多少元" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">元</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">优惠内容:减免</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="card_price" lay-verify="title" autocomplete="off" placeholder="请输入优惠内容" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">元</div>
+            </div>
+           <div class="layui-form-item">
+            <label class="layui-form-label">用券时间</label>
+            <div class="layui-input-block">
+                <input type="radio" name="card_time" value="1" title="固定时间" checked="">
+
+
+                <input type="radio" name="card_time" value="2" title="领取后生效">
+            </div>
+            </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">开始时间</label>
+                <div class="layui-input-inline">
+                    <input type="text"  name="starttime" class="layui-input" id="starttime" placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">结束时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="endtime" class="layui-input" id="endtime" placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">每人限领次数</label>
+            <div class="layui-input-block">
+                <input type="radio" name="card_limit" value="1" title="限制次数(新人卷限领1次)" checked="">
+                <input type="text" name="limit_num"  >次
+                <input type="radio" name="card_limit" value="2" title="不限次数">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">活动商品</label>
+            <div class="layui-input-block">
+                <input type="radio" name="all_status" value="1" title="全部商品可用" checked="">
+                <input type="radio" name="all_status" value="2" title="指定商品可用">
+            </div>
+        </div>
+            <div class="Operate_cont clearfix">
+
+                    <input class="btn btn-primary radius Operate_cont_btn" type="submit" value="提交">
+                    <a class="btn btn-primary return" onclick="javascript:history.back(-1);return false;">返回</a>
+            </div>
+
+    </form>
+</div>
+
+
+<script type="text/javascript" src="__STATIC__/admin/layui/layui.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+        form.render();
+        laydate.render({
+            elem: '#starttime'
+        });
+        laydate.render({
+            elem: '#endtime'
+        });
+
+    });
+</script>
+</body>
+</html>

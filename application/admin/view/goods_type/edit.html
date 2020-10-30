@@ -1,0 +1,71 @@
+
+<include file="common/header"/>
+<body>
+<div class="type_style">
+    <div class="crumbs">
+        <ul>
+            <li>
+                <a href="{:url('GoodsType/index')}">分类管理</a>
+            </li>
+            <li class="uline">/</li>
+            <li>
+                <a class="active" href="javascript:;">修改分类</a>
+            </li>
+        </ul>
+    </div>
+    <form action="" method="post" class="form form-horizontal">
+        <div class="Operate_cont clearfix">
+            <label class="form-label"> 分类名称：</label>
+            <div class="formControls ">
+                <input type="text" class="input-text" value="{$goods_one['class_name']}" placeholder=""  name="class_name" datatype="*" nullmsg="角色名称不能为空！">
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">分类描述：</label>
+            <div class="formControls ">
+                <input type="text" class="input-text" value="{$goods_one['class_desc']}" placeholder=""  name="class_desc" datatype="*" nullmsg="角色描述不能为空！">
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+
+
+        </if>
+        <div class="Operate_cont clearfix">
+            <label class="form-label">是否开启：</label>
+            <div class="formControls">
+                <label >
+                    <input type="radio"  name="class_status" value="1" <if condition="$goods_one['status'] eq 1"> checked</if>>是
+                </label>
+                <label >
+                    <input type="radio"  name="class_status" value="0"<if condition="$goods_one['status'] eq 0"> checked</if> >否
+                </label>
+            </div>
+        </div>
+
+        <div class="Operate_cont clearfix">
+             <input type="hidden" name="class_id" value="$goods_one['id']">
+            <input class="btn btn-primary radius Operate_cont_btn" type="submit" value="修改">
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="__STATIC__/admin/Widget/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        //表单验证
+        $("form").Validform({
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    //默认表单
+                    var objtip=o.obj.parents(".formControls").find(".Validform_checktip");
+                    cssctl(objtip,o.type);
+                    objtip.text(msg);
+                }
+            },
+            showAllError:true
+        })
+    });
+</script>
+</body>
+</html>
